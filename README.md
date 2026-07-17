@@ -16,9 +16,6 @@ trends/
 ├── latest.md                     # 最新日の「ざっと見」（詳細版）のミラー
 ├── templates/
 │   └── topic-report.md          # トピックレポートのテンプレート
-├── _feedback/                    # Slack Top3 の投票ループ用（学習データ）
-│   ├── picks.jsonl              # いつ何を Top3 として投稿したか（Slack ts 付き）
-│   └── votes.jsonl              # スレッド投票の記録
 └── YYYY-MM-DD/                   # 1 日分の成果物
     ├── <topic-slug>.md          # トピック別レポート（12 本）
     ├── daily-digest.md          # その日の横断ダイジェスト
@@ -33,17 +30,6 @@ trends/
 - トピックレポート: `YYYY-MM-DD/<slug>.md`
 - 日次ダイジェスト: `YYYY-MM-DD/daily-digest.md`
 - 音声（過去分のみ）: `YYYY-MM-DD/daily-trends.mp3`
-
-## Slack Top3（毎日のざっと見）
-
-日々の閲覧は Slack の **Top3** に一本化しています。全部を読むのではなく、30 秒で眺めて、気になったものだけリンクを踏む使い方です。
-
-- 生成: `hermes/data/scripts/trend_top3.py <date>` が、その日の全 item（12 トピック × 5 = 最大 60 件）から **3 件を選んで** Slack 用のメッセージを出します。
-- 選び方: **今はランダム**です（日付シードなので同じ日は同じ 3 件になります）。投票が溜まったら好みに寄せた重み付け選出へ切り替えます。
-- 中身: 3 件それぞれにタイトル・トピック・投票できる粒度の概要・出典リンク。末尾にその日のフォルダへのリンク（全トピックの全リンクへはここから）。
-- 投票: 投稿のスレッドに「1」「👍2 👎3」などで返信してください。`_feedback/picks.jsonl` の Slack `ts` と突き合わせて、どの記事への票かを解決し `_feedback/votes.jsonl` に記録します。
-
-詳細版（全トピックのトップ5）を見たいときは、その日の `overview.md`（または最新日の `latest.md`）を開いてください。
 
 ## 生成のしくみ
 
